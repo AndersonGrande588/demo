@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Facturacion Hayabuza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HAYABUZA</h2>
+                <p>Sistema de Facturacion</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html" class="active">&#128200; Dashboard</a></li>
+                <li><a href="clientes.html">&#128100; Clientes</a></li>
+                <li><a href="facturas.html">&#128179; Facturas</a></li>
+                <li><a href="nueva-factura.html">&#10133; Nueva Factura</a></li>
+                <li class="admin-only"><a href="usuarios.html">&#128101; Usuarios</a></li>
+            </ul>
+            <div class="user-info">
+                <div class="name" id="userName">--</div>
+                <div class="role" id="userRole">--</div>
+                <button class="btn btn-sm btn-secondary" onclick="logout()">Cerrar Sesion</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>Dashboard</h1>
+            </div>
+            
+            <div id="alert" class="alert"></div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">&#128179;</div>
+                    <div class="stat-info">
+                        <h3 id="statFacturas">0</h3>
+                        <p>Total Facturas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">&#128100;</div>
+                    <div class="stat-info">
+                        <h3 id="statClientes">0</h3>
+                        <p>Total Clientes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">&#9989;</div>
+                    <div class="stat-info">
+                        <h3 id="statActivas">0</h3>
+                        <p>Facturas Activas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red">&#128176;</div>
+                    <div class="stat-info">
+                        <h3 id="statVentas">$0</h3>
+                        <p>Total Ventas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Invoices -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Facturas Recientes</h2>
+                    <a href="facturas.html" class="btn btn-sm btn-primary">Ver Todas</a>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Numero</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentInvoices">
+                            <tr><td colspan="5" style="text-align:center;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

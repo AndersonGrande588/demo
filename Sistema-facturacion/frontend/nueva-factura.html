@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Factura - Sistema de Facturacion Hayabuza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HAYABUZA</h2>
+                <p>Sistema de Facturacion</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">&#128200; Dashboard</a></li>
+                <li><a href="clientes.html">&#128100; Clientes</a></li>
+                <li><a href="facturas.html">&#128179; Facturas</a></li>
+                <li><a href="nueva-factura.html" class="active">&#10133; Nueva Factura</a></li>
+                <li class="admin-only"><a href="usuarios.html">&#128101; Usuarios</a></li>
+            </ul>
+            <div class="user-info">
+                <div class="name" id="userName">--</div>
+                <div class="role" id="userRole">--</div>
+                <button class="btn btn-sm btn-secondary" onclick="logout()">Cerrar Sesion</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>Crear Nueva Factura</h1>
+                <a href="facturas.html" class="btn btn-secondary">Volver</a>
+            </div>
+            
+            <div id="alert" class="alert"></div>
+            
+            <form id="facturaForm" class="card">
+                <div class="form-group">
+                    <label>Cliente *</label>
+                    <select id="clienteSelect" required>
+                        <option value="">Seleccione un cliente</option>
+                    </select>
+                </div>
+                
+                <h3 style="margin: 25px 0 15px;">Items de la Factura</h3>
+                <div id="itemsContainer" class="factura-items"></div>
+                
+                <button type="button" class="btn btn-secondary" onclick="addItemRow()">+ Agregar Item</button>
+                
+                <div class="totals-section">
+                    <div class="row">
+                        <span>Subtotal:</span>
+                        <span id="subtotalDisplay">$0.00</span>
+                    </div>
+                    <div class="row">
+                        <span>Impuestos (19%):</span>
+                        <span id="impuestosDisplay">$0.00</span>
+                    </div>
+                    <div class="row total">
+                        <span>TOTAL:</span>
+                        <span id="totalDisplay">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Notas</label>
+                    <textarea id="notas" rows="2" placeholder="Notas adicionales..."></textarea>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <button type="submit" class="btn btn-success btn-lg">Generar Factura</button>
+                    <a href="facturas.html" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+            
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Guardando factura...</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/facturas.js"></script>
+</body>
+</html>

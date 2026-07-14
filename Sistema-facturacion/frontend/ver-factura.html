@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Factura - Sistema de Facturacion Hayabuza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HAYABUZA</h2>
+                <p>Sistema de Facturacion</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">&#128200; Dashboard</a></li>
+                <li><a href="clientes.html">&#128100; Clientes</a></li>
+                <li><a href="facturas.html">&#128179; Facturas</a></li>
+                <li><a href="nueva-factura.html">&#10133; Nueva Factura</a></li>
+                <li class="admin-only"><a href="usuarios.html">&#128101; Usuarios</a></li>
+            </ul>
+            <div class="user-info">
+                <div class="name" id="userName">--</div>
+                <div class="role" id="userRole">--</div>
+                <button class="btn btn-sm btn-secondary" onclick="logout()">Cerrar Sesion</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>Detalle de Factura</h1>
+                <div>
+                    <button id="btnDescargar" class="btn btn-primary">&#128190; Descargar PDF</button>
+                    <button id="btnAnular" class="btn btn-warning">&#10060; Anular</button>
+                    <a href="facturas.html" class="btn btn-secondary">Volver</a>
+                </div>
+            </div>
+            
+            <div id="alert" class="alert"></div>
+            
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                    <div>
+                        <h2 id="facturaNumero" style="color: var(--primary);">--</h2>
+                        <p>Estado: <span id="facturaEstado">--</span></p>
+                    </div>
+                    <div style="text-align: right;">
+                        <p><strong>Fecha:</strong> <span id="facturaFecha">--</span></p>
+                    </div>
+                </div>
+                
+                <div class="info-section" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 10px;">Cliente</h3>
+                    <p><strong id="clienteNombre">--</strong></p>
+                    <p>Documento: <span id="clienteDocumento">--</span></p>
+                    <p>Telefono: <span id="clienteTelefono">--</span></p>
+                    <p>Email: <span id="clienteEmail">--</span></p>
+                    <p>Direccion: <span id="clienteDireccion">--</span></p>
+                </div>
+                
+                <h3 style="margin-bottom: 15px;">Items</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descripcion</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalleItems"></tbody>
+                    </table>
+                </div>
+                
+                <div class="totals-section" style="width: 350px; margin-left: auto;">
+                    <div class="row">
+                        <span>Subtotal:</span>
+                        <span id="subtotalDisplay">$0.00</span>
+                    </div>
+                    <div class="row">
+                        <span>Impuestos (19%):</span>
+                        <span id="impuestosDisplay">$0.00</span>
+                    </div>
+                    <div class="row total">
+                        <span>TOTAL:</span>
+                        <span id="totalDisplay">$0.00</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <strong>Notas:</strong> <span id="facturaNotas">Sin notas</span>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando factura...</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/facturas.js"></script>
+</body>
+</html>

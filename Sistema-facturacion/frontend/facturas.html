@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturas - Sistema de Facturacion Hayabuza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HAYABUZA</h2>
+                <p>Sistema de Facturacion</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">&#128200; Dashboard</a></li>
+                <li><a href="clientes.html">&#128100; Clientes</a></li>
+                <li><a href="facturas.html" class="active">&#128179; Facturas</a></li>
+                <li><a href="nueva-factura.html">&#10133; Nueva Factura</a></li>
+                <li class="admin-only"><a href="usuarios.html">&#128101; Usuarios</a></li>
+            </ul>
+            <div class="user-info">
+                <div class="name" id="userName">--</div>
+                <div class="role" id="userRole">--</div>
+                <button class="btn btn-sm btn-secondary" onclick="logout()">Cerrar Sesion</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>Historial de Facturas</h1>
+                <a href="nueva-factura.html" class="btn btn-success">+ Nueva Factura</a>
+            </div>
+            
+            <div id="alert" class="alert"></div>
+            
+            <div class="card">
+                <div class="search-bar">
+                    <input type="text" id="searchFacturas" placeholder="Buscar por numero o cliente...">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Numero</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="facturasTable">
+                            <tr><td colspan="6" style="text-align:center;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/facturas.js"></script>
+</body>
+</html>

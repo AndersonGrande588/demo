@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - Sistema de Facturacion Hayabuza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>HAYABUZA</h2>
+                <p>Sistema de Facturacion</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html">&#128200; Dashboard</a></li>
+                <li><a href="clientes.html">&#128100; Clientes</a></li>
+                <li><a href="facturas.html">&#128179; Facturas</a></li>
+                <li><a href="nueva-factura.html">&#10133; Nueva Factura</a></li>
+                <li class="admin-only"><a href="usuarios.html" class="active">&#128101; Usuarios</a></li>
+            </ul>
+            <div class="user-info">
+                <div class="name" id="userName">--</div>
+                <div class="role" id="userRole">--</div>
+                <button class="btn btn-sm btn-secondary" onclick="logout()">Cerrar Sesion</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>Gestion de Usuarios</h1>
+                <button class="btn btn-success" onclick="openModal()">+ Nuevo Usuario</button>
+            </div>
+            
+            <div id="alert" class="alert"></div>
+            
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuariosTable">
+                            <tr><td colspan="5" style="text-align:center;">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Cargando...</p>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal-overlay" id="usuarioModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nuevo Usuario</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="usuarioForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nombre *</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group" id="passwordField">
+                        <label>Contrasena *</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Rol *</label>
+                        <select id="rol" required>
+                            <option value="empleado">Empleado</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="administrador">Administrador</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="activo">
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/usuarios.js"></script>
+</body>
+</html>
