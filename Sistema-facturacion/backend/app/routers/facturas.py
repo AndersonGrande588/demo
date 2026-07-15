@@ -62,9 +62,9 @@ def descargar_pdf(
     
     return Response(
         content=pdf_bytes,
-        media_type="application/pdf",
+        media_type="text/html; charset=utf-8",
         headers={
-            "Content-Disposition": f"attachment; filename={factura.numero}.pdf"
+            "Content-Disposition": f"inline; filename={factura.numero}.html"
         }
     )
 
