@@ -5,10 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
     
     loadUserInfo();
-    loadFacturas();
     loadClientesSelect();
     
-    document.getElementById('searchFacturas').addEventListener('input', debounce(searchFacturas, 300));
+    // Solo para facturas.html (listado)
+    if (document.getElementById('facturasTable')) {
+        loadFacturas();
+    }
+    
+    const searchInput = document.getElementById('searchFacturas');
+    if (searchInput) {
+        searchInput.addEventListener('input', debounce(searchFacturas, 300));
+    }
+    
+    // Solo para nueva-factura.html
+    const facturaForm = document.getElementById('facturaForm');
+    if (facturaForm) {
+        facturaForm.addEventListener('submit', saveFactura);
+    }
 });
 
 function loadUserInfo() {
@@ -81,11 +94,21 @@ async function searchFacturas() {
 async function loadClientesSelect() {
     try {
         clientesList = await apiRequest('/api/clientes');
+        
+        // Para páginas que usan clase .cliente-select
         const selects = document.querySelectorAll('.cliente-select');
         selects.forEach(select => {
             select.innerHTML = '<option value="">Seleccione un cliente</option>' +
                 clientesList.map(c => `<option value="${c.id}">${escapeHtml(c.nombre)} - ${escapeHtml(c.documento)}</option>`).join('');
         });
+        
+        // Para nueva-factura.html que usa id="clienteSelect"
+        const clienteSelect = document.getElementById('clienteSelect');
+        if (clienteSelect) {
+            clienteSelect.innerHTML = '<option value="">Seleccione un cliente</option>' +
+                clientesList.map(c => `<option value="${c.id}">${escapeHtml(c.nombre)} - ${escapeHtml(c.documento)}</option>`).join('');
+        }
+        
     } catch (error) {
         console.error('Error cargando clientes:', error);
     }
@@ -141,24 +164,59 @@ function calculateTotals() {
     const impuestos = subtotal * 0.19;
     const total = subtotal + impuestos;
     
-    document.getElementById('subtotal').textContent = formatCurrency(subtotal);
-    document.getElementById('impuestos').textContent = formatCurrency(impuestos);
-    document.getElementById('total').textContent = formatCurrency(total);
+    document.getElementById('subtotalDisplay').textContent = formatCurrency(subtotal);
+    document.getElementById('impuestosDisplay').textContent = formatCurrency(impuestos);
+    document.getElementById('totalDisplay').textContent = formatCurrency(total);
 }
 
 async function saveFactura(e) {
     e.preventDefault();
     
     const clienteId = document.getElementById('clienteSelect').value;
-    if (!clienteId) {        return;
+    if (!clienteId) {
+        showAlert('Debe seleccionar un cliente', 'error');
+        return;
     }
+    
+    // Recoger los items
+    const detalles = [];
+    document.querySelectorAll('.item-row').forEach(row => {
+        const descripcion = row.querySelector('.item-desc').value.trim();
+        const cantidad = parseFloat(row.querySelector('.item-qty').value);
+        const precio_unitario = parseFloat(row.querySelector('.item-price').value);
+        
+        if (descripcion && cantidad > 0 && precio_unitario >= 0) {
+            detalles.push({
+                descripcion: descripcion,
+                cantidad: cantidad,
+                precio_unitario: precio_unitario
+            });
+        }
+    });
+    
+    if (detalles.length === 0) {
+        showAlert('Debe agregar al menos un item valido', 'error');
+        return;
+    }
+    
+    const payload = {
+        cliente_id: parseInt(clienteId),
+        detalles: detalles,
+        notas: document.getElementById('notas').value
+    };
     
     try {
         toggleLoading(true);
-        const factura = await apiRequest(`/api/facturas/${id}`);
-        renderFacturaDetalle(factura);
+        const nuevaFactura = await apiRequest('/api/facturas', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
+        showAlert('Factura creada exitosamente', 'success');
+        setTimeout(() => {
+            window.location.href = `ver-factura.html?id=${nuevaFactura.id}`;
+        }, 1000);
     } catch (error) {
-        showAlert(error.message, 'error');
+        showAlert(error.message || 'Error al crear la factura', 'error');
     } finally {
         toggleLoading(false);
     }
