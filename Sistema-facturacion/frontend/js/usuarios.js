@@ -74,6 +74,7 @@ function openModal() {
 
 function closeModal() {
     toggleModal('usuarioModal', false);
+    console.log("cerrar modal pulsado");
 }
 
 async function editUsuario(id) {
