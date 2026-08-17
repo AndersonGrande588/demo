@@ -73,8 +73,10 @@ function openModal() {
 }
 
 function closeModal() {
+    editingId = null;
+    document.getElementById('usuarioForm').reset();
     toggleModal('usuarioModal', false);
-    console.log("cerrar modal pulsado");
+    console.log("close Modal onclick");
 }
 
 async function editUsuario(id) {

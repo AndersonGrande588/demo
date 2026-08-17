@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
-#fff
+
 class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql://facturacion_user:facturacion_pass@localhost:5432/facturacion_db"
     SECRET_KEY: str = "hayabuza-facturacion-secret-key-2026-anderson-grande"
