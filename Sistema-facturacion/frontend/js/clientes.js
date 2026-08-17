@@ -83,6 +83,12 @@ function openModal() {
     toggleModal('clienteModal', true);
 }
 
+function closeModal() {
+    toggleModal('clienteModal', false);
+    console.log("close Modal onclick");    
+}
+
+
 function editCliente(id) {
     const cliente = clientesData.find(c => c.id === id);
     if (!cliente) return;
