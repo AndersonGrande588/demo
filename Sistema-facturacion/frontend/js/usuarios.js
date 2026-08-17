@@ -1,7 +1,6 @@
 let usuariosData = [];
 let editingId = null;
 
-
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
     
@@ -74,10 +73,7 @@ function openModal() {
 }
 
 function closeModal() {
-    const modal = bootstrap.Modal.getInstance(document.getElementById('usuarioModal'));
-    if (modal) {
-        modal.hide();
-    }
+    toggleModal('usuarioModal', false);
     console.log("close Modal onclick");
 }
 
