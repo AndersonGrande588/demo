@@ -112,13 +112,14 @@ body {
     color: white;
     width: 100%;
 }
-
+color
 .btn-primary:hover { background: var(--primary-dark); }
 
 .btn-success { background: var(--secondary); color: white; }
 .btn-danger { background: var(--danger); color: white; }
 .btn-warning { background: var(--warning); color: white; }
 .btn-secondary { background: var(--gray); color: white; }
+.btn-cancelar { background: var(--danger); color:white; }
 
 .btn-sm { padding: 8px 16px; font-size: 13px; }
 .btn-lg { padding: 14px 28px; font-size: 16px; }

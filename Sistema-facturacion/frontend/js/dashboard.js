@@ -1,3 +1,5 @@
+const togglePassword = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
     
@@ -58,3 +60,14 @@ async function loadRecentInvoices() {
         console.error('Error cargando facturas recientes:', error);
     }
 }
+
+togglePassword.addEventListener('click', function() {
+    // Cambiar el tipo de input
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Cambiar el ícono
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
+});
