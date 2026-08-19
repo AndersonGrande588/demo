@@ -3,9 +3,9 @@ let clientesList = [];
 
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
-    
     loadUserInfo();
     loadClientesSelect();
+    setupSidebar();
     
     // Solo para facturas.html (listado)
     if (document.getElementById('facturasTable')) {
@@ -302,4 +302,28 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+}
+// Para ver-factura.html
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('clienteNombre') && !document.getElementById('facturasTable')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const facturaId = urlParams.get('id');
+        if (facturaId) {
+            loadFacturaDetalle(facturaId);
+        } else {
+            showAlert('ID de factura no proporcionado', 'error');
+        }
+    }
+});
+
+async function loadFacturaDetalle(id) {
+    try {
+        toggleLoading(true);
+        const factura = await apiRequest(`/api/facturas/${id}`);
+        renderFacturaDetalle(factura);
+    } catch (error) {
+        showAlert('Error al cargar la factura', 'error');
+    } finally {
+        toggleLoading(false);
+    }
 }
