@@ -1,0 +1,52 @@
+# Directorios de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+.venv/
+
+# Variables de entorno (archivos con secretos)
+.env
+.env.local
+.env.*.local
+
+# Archivos de base de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de dependencias de frontend
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log*
+
+# Archivos de editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+
+# Archivos de Docker
+*.tar
+*.tar.gz
+
+# Archivos de migración de Alembic (si ya están versionados)
+# alembic/versions/*.py
+
+# Archivos generados por tu PDF
+*.pdf
