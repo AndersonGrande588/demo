@@ -13,9 +13,9 @@ ENV/
 .venv/
 
 # Variables de entorno (archivos con secretos)
-.env
-.env.local
-.env.*.local
+*.env
+*.env.local
+*.env.*.local
 
 # Archivos de base de datos locales
 *.db
